@@ -1,12 +1,18 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { CountiesService } from './counties.service';
+import { County } from './schemas/county.schema';
 
-@Controller('counties')
+@Controller('suggest')
 export class CountiesController {
   constructor(private countiesService: CountiesService) {}
 
   @Get()
-  getCounties() {
-    return this.countiesService.getCounties();
+  async getAll(): Promise<County[]> {
+    return this.countiesService.getAll();
+  }
+
+  @Get('/:q')
+  async suggestion(@Param('q') q: string): Promise<County[]> {
+    return this.countiesService.getSuggestion(q);
   }
 }
