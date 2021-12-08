@@ -9,7 +9,7 @@ export class County {
   fip: string;
 
   @Prop()
-  state: number;
+  state: string;
 
   @Prop()
   name: string;

@@ -1,5 +1,18 @@
-[
-  { git push --set-upstream origin bugfix-dms-gfk-datafeed },
+db.createUser({
+      user: "admin",
+      pwd: "admin123",
+      roles: [
+          {
+              role: "readWrite",
+              db: "counties"
+          }
+      ]
+  }
+);
+
+db.counties.createIndex({"state": "text", "name": "text"});
+db.counties.insertMany([
+  { "fips": "01001", "state": "AL", "name": "Autauga" },
   { "fips": "01003", "state": "AL", "name": "Baldwin" },
   { "fips": "01005", "state": "AL", "name": "Barbour" },
   { "fips": "01007", "state": "AL", "name": "Bibb" },
@@ -3239,3 +3252,4 @@
   { "fips": "78020", "state": "VI", "name": "St John Island" },
   { "fips": "78030", "state": "VI", "name": "St Thomas Island" }
 ]
+);
