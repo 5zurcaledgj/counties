@@ -6,7 +6,7 @@ export type CountyDocument = County & Document;
 @Schema()
 export class County {
   @Prop()
-  fip: string;
+  fips: string;
 
   @Prop()
   state: string;

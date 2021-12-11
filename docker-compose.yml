@@ -10,7 +10,7 @@ services:
     volumes:
       - ./:/usr/src/app
     ports:
-      - "3000:3000"
+      - 3000:3000
     depends_on:
       - mongo
   mongo:
@@ -18,11 +18,10 @@ services:
     image: mongo
     restart: always
     volumes:
-      - ./data:/data/db
+      - ./mongo-seed/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
     ports:
-      - "27017:27017"
-  mongo-seed:
-    build: ./mongo-seed
-    links:
-      - mongodb
-
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin123
+      MONGO_INITDB_DATABASE: counties

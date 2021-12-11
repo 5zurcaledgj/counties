@@ -1,4 +1,4 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, NotFoundException, Query } from '@nestjs/common';
 import { CountiesService } from './counties.service';
 import { County } from './schemas/county.schema';
 
@@ -8,6 +8,10 @@ export class CountiesController {
 
   @Get()
   async getAll(@Query('q') q: string): Promise<County[]> {
+    if (!q) {
+      throw new NotFoundException('Missing or empty parameter q');
+    }
+
     return this.countiesService.getSuggestion(q);
   }
 }
